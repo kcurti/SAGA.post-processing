@@ -12,17 +12,17 @@ output.results <- 'y' # 'y' or 'n'; output csv data files?
 save.wkspace   <- 'y'
 
 # Species/season
-species <- c("Blueback")   # For folder names, e.g. Mackerel
-sp.abb <- c("Blueback")    # For file names, e.g. Mack
-survey <- c('Fall')     #'Fall','Spring','Winter','Shrimp'
+species <- c("AmericanShad")   # For folder names, e.g. Mackerel
+sp.abb <- c("AmShad")    # For file names, e.g. Mack
+survey <- c('Spring')     #'Fall','Spring','Winter','Shrimp'
 
 # Year range
-fyr <- 1975
-lyr <- 2019
+fyr <- 2009
+lyr <- 2021
   if(fyr==1976 && survey=='Spring') {folder.fyr <- 1975}  else  {folder.fyr <- fyr}
 
 # Approximate number of years in each year bin for average length frequencies
-yrs.bin <- 3
+yrs.bin <- 7
 
 # Directories - need to manually change for Mackerel
 net.dir <- '//net.nefsc.noaa.gov/home0/kcurti'
@@ -50,8 +50,13 @@ if(species%in%c('Blueback','Alewife','AmericanShad'))
 omit.survey.list <- data.frame(matrix(NA,nrow=0,ncol=2,dimnames=list(c(),c("Season","Year"))))
 if(survey=='Fall' && lyr>=2017) 
 {
-  omit.survey.list[1,] <- c(survey,2017)
+  omit.survey.list[(nrow(omit.survey.list)+1),] <- c(survey,2017) # vessel breakdown
 }
+if(survey=='Spring' && lyr>=2020) 
+{
+  omit.survey.list[(nrow(omit.survey.list)+1),] <- c(survey,2020) # covid
+}  
+
 
 # Figure details
 fig.type <- 'wmf'

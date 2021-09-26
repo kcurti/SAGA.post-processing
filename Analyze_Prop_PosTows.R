@@ -22,15 +22,15 @@ if(stand.alone == 'y')  {
   output.results <- 'y'# 'y' or 'n'; output csv data files?
 
   omit.survey.list <- data.frame(matrix(NA,nrow=0,ncol=2,dimnames=list(c(),c("Season","Year"))))
-  if(survey=='Fall' && lyr>=2018) 
-    {
-    omit.survey.list[1,] <- c(survey,2018)
-    }
+  if(survey=='Fall' && lyr>=2017) 
+  {
+    omit.survey.list[(nrow(omit.survey.list)+1),] <- c(survey,2017) # vessel breakdown
+  }
+  if(survey=='Spring' && lyr>=2020) 
+  {
+    omit.survey.list[(nrow(omit.survey.list)+1),] <- c(survey,2020) # covid
+  } 
 }
-
-
-
-
 
 
 
